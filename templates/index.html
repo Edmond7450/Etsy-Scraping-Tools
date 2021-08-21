@@ -1,0 +1,158 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <title>Etsy Tools</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+<nav>
+    <div class="container nav-wrapper">
+        <a href="/" class="brand-logo">Etsy Scraping Tools</a>
+    </div>
+</nav>
+
+<ul id="slide-out" class="sidenav">
+    <li><a href="javascript:void(0);"><i class="material-icons">file_download</i>Result File List</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    {% block filelist %}
+        {% for file in files %}
+            <li><a class="waves-effect" href="{% static 'result/' %}{{ file }}">{{ file }}</a></li>
+        {% endfor %}
+    {% endblock filelist %}
+</ul>
+
+<div class="container main">
+    <form class="form" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <h5>FIND SHOPS</h5>
+        </div>
+        <div class="row">
+            <div class="col s9">
+                <div class="input-field">
+                    <label for="last_name">Input search/category URLs:</label>
+                    <input type="text" id="urls" name="urls" class="validate" placeholder="Input URL Here" value="{{ urls }}">
+                </div>
+            </div>
+            <div class="col s3">
+                <div class="input-field">
+                    <label for="last_name">Pages:</label>
+                    <input type="number" id="pages" name="pages" class="validate" placeholder="" value="{{ pages }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field">
+                    <label for="last_name">Input keywords:</label>
+                    <input type="text" id="shop_keywords" name="shop_keywords" class="validate" placeholder="Input keywords" value="{{ shop_keywords }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h5>FIND KEYWORDS</h5>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field">
+                    <label for="last_name">Input productIDs:</label>
+                    <input type="text" id="product_ids" name="product_ids" class="validate" placeholder="Input productIDs" value="{{ product_ids }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field">
+                    <label for="last_name">Input keywords:</label>
+                    <input type="text" id="product_keywords" name="product_keywords" class="validate" placeholder="Input keywords" value="{{ product_keywords }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h5>ANALYZE SHOPS</h5>
+        </div>
+        <div class="row">
+            <div class="col s9">
+                <div class="input-field">
+                    <label for="last_name">Input shop names</label>
+                    <input type="text" id="analyze_shops" name="analyze_shops" class="validate" placeholder="Input shop names" value="{{ analyze_shops }}">
+                </div>
+            </div>
+            <div class="col s3">
+                <div class="container_ckb_product">
+                    <label>
+                        <input type="checkbox" class="filled-in" id="ckb_product" name="ckb_product">
+                        <span>Analyze products</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h5>ANALYZE KEYWORDS</h5>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field">
+                    <label for="last_name">Input keywords</label>
+                    <input type="text" id="analyze_keywords" name="analyze_keywords" class="validate" placeholder="Input keywords" value="{{ analyze_keywords }}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s3">
+                <a class="btn waves-effect waves-light" id="btnSearch">Search
+                    <i class="material-icons right">search</i>
+                </a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger btn-floating btn-small">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+            <div class="col s7" id="preloader">
+                <div class="row>">
+                    <div class="col s1">
+                        <div class="preloader-wrapper small">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s11">
+                        <pre id="server_status" class="hide"></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col s2">
+                <a class="btn waves-effect waves-light red hide" id="btnStop">Stop
+                    <i class="material-icons right">close</i>
+                </a>
+            </div>
+        </div>
+    </form>
+
+    {% block content %}
+    {% endblock content %}
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

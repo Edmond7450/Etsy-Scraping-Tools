@@ -1,0 +1,34 @@
+form {
+    padding-top: 30px;
+}
+
+.sidenav-trigger {
+    margin-left: 20px;
+}
+
+.main.container {
+    width: 90%;
+    max-width: 1440px;
+}
+
+#server_status {
+    margin-top: -25px;
+    margin-left: 5%;
+    width: 100%;
+    height: 90px;
+    overflow: scroll;
+    border: 1px solid rgba(51, 51, 51, 0.12);
+    background: rgba(246, 246, 246, 0.2);
+}
+
+h5 {
+    margin-bottom: 0 !important;
+}
+
+.input-field {
+    margin-bottom: 0 !important;
+}
+
+.container_ckb_product {
+    padding-top: 25px;
+}
